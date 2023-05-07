@@ -1,0 +1,51 @@
+﻿@model WebCinema.Models.ViewModels.SpettacoliVM
+
+@{
+    ViewData["Title"] = "Upsert";
+}
+
+<form method="post" asp-action="Upsert">
+    <input asp-for="Spettacoli.Id" hidden value=@Model.Spettacoli.Id/>
+
+    <div class="border p-3 mt-4 row">
+        <div class="row pb-2">
+            <h2 class="text-primary">@(Model.Spettacoli.Id!=0? "Update":"Create") Spettacolo</h2>
+            <hr />
+        </div>
+        <div asp-validation-summary="All"></div>
+        <div class="form-group">
+
+            <label asp-for="Spettacoli.Idfilm" class="control-label"></label>
+            <select asp-for="Spettacoli.Idfilm" class="form-select" asp-items="@Model.FilmList">
+                <option disabled selected>--Select Film--</option>
+            </select>
+            <span asp-validation-for="Spettacoli.Idfilm" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Spettacoli.Idsala" class="control-label"></label>
+            <select asp-for="Spettacoli.Idsala" class="form-select" asp-items="@Model.SaleList">
+                <option disabled selected>--Select Sala--</option>
+            </select>
+            <span asp-validation-for="Spettacoli.Idsala" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Spettacoli.DataOra" class="control-label"></label>
+            <input asp-for="Spettacoli.DataOra" class="form-control" />
+            <span asp-validation-for="Spettacoli.DataOra" class="text-danger"></span>
+        </div>
+        @if (Model.Spettacoli.Id != 0)
+        {
+            <button type="submit" class="btn btn-primary" style="width:150px">Update</button>
+        }else{
+            <button type="submit" class="btn btn-primary" style="width:150px">Create</button>
+        }
+       
+        <a asp-action="Index" class="btn btn-secondary" style="width:150px">Back to List</a>
+    </div>
+</form>
+@section Scripts{
+    @{
+        <partial name="_ValidationScriptsPartial" />
+    }
+}
+

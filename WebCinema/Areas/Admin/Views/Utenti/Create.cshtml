@@ -1,0 +1,57 @@
+﻿@model WebCinema.Models.Utenti
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<form method="post" asp-action="Create">
+    <div class="border p-3 mt-4">
+        <div class="row pb-2">
+            <h2 class="text-primary">Create Utente</h2>
+            <hr />
+        </div>
+        @*<div asp-validation-summary="All"></div>*@
+        <div class="row mb-3">
+            <label asp-for="Cognome" class="control-label"></label>
+            <input asp-for="Cognome" class="form-control" />
+            <span asp-validation-for="Cognome" class="text-danger"></span>
+        </div>
+        <div class="row mb-3">
+            <label asp-for="Nome" class="control-label"></label>
+            <input asp-for="Nome" class="form-control" />
+            <span asp-validation-for="Nome" class="text-danger"></span>
+        </div>
+        <div class="row mb-3">
+            <label asp-for="Email" class="control-label"></label>
+            <input asp-for="Email" class="form-control" />
+            <span asp-validation-for="Email" class="text-danger"></span>
+        </div>
+        <div class="row mb-3">
+            <label asp-for="Password" class="control-label"></label>
+            <input asp-for="Password" class="form-control" />
+            <span asp-validation-for="Password" class="text-danger"></span>
+        </div>
+        <div class="row mb-3">
+            <label asp-for="Sesso" class="control-label"></label>
+            <input asp-for="Sesso" class="form-control" />
+            <span asp-validation-for="Sesso" class="text-danger"></span>
+        </div>
+        <div class="row mb-3">
+            <label asp-for="DataNascita" class="control-label"></label>
+            <input asp-for="DataNascita" class="form-control" />
+            <span asp-validation-for="DataNascita" class="text-danger"></span>
+        </div>
+        <div class="row mb-3">
+            <label asp-for="ComuneResidenza" class="control-label"></label>
+            <input asp-for="ComuneResidenza" class="form-control" />
+            <span asp-validation-for="ComuneResidenza" class="text-danger"></span>
+        </div>
+        <button type="submit" class="btn btn-primary" style="width:150px">Create</button>
+        <a asp-action="Index" class="btn btn-secondary" style="width:150px">Back to List</a>
+    </div>
+</form>
+@section Scripts{
+    @{
+        <partial name="_ValidationScriptsPartial" />
+    }
+}
