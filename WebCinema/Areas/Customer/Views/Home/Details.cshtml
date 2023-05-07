@@ -1,25 +1,29 @@
 ﻿@model WebCinema.Models.ViewModels.PrenotazioneVM
+@{
+
+    ViewData["Title"] = "Details";
+
+}
+
 <form method="post">
 
-    <div class="card container">
+    <div class="card container pt-4">
 
         <div class="card-header bg-primary text-light ml-0 row ">
 
             <div class="col-12 col-md-6">
 
-                <h1 class="h1">@Model.film.Titolo </h1>
+                <h1 class="text-white-50">@Model.film.Titolo</h1>
 
-                <p class="badge text-bg-danger rounded-pill">@Model.film.Genere</p>
+                <p class="text-warning">xxx</p>
 
             </div>
 
             <div class="col-12 col-md-6 text-end pt-4">
 
-                <div class="col-12 col-lg-3 offset-lg-1 text-center">
+                <span class="badge bg-info pt-2" style="height:30px;">xxx</span>
 
-                    <img src="@Model.film.Immagine" width="100%" class="rounded" />
-
-                </div>
+                <span class="badge bg-warning pt-2" style="height:30px;">xxxx</span>
 
             </div>
 
@@ -35,13 +39,13 @@
 
                         <div class="row pl-2">
 
-                            <h5 class="text-muted">SPETTACOLI DISPONIBILI:</h5>
+                            <h5 class="text-muted">ISBN : xxxx</h5>
 
                         </div>
 
                         <div class="row pl-2">
 
-                            <h5 class="text-muted pb-2">List Price: <strike>---x---</strike></h5>
+                            <h5 class="text-muted pb-2">List Price: <strike>xxx</strike></h5>
 
                         </div>
 
@@ -49,7 +53,7 @@
 
                             <div class="p-1 col-2 bg-secondary border-bottom">
 
-                                <div>Spettacoli</div>
+                                <div>Quantity</div>
 
                             </div>
 
@@ -79,63 +83,47 @@
 
                                 <div>Price</div>
 
-                                <div class="p-1 col-2 bg-secondary">
+                            </div>
 
-                                    <div>$$</div>
+                            <div class="p-1 col-2 bg-secondary">
 
-                                </div>
-
-                                <div class="p-1 col-2 bg-secondary">
-
-                                    <div>$$</div>
-
-                                </div>
-
-                                <div class="p-1 col-2 bg-secondary">
-
-                                    <div>$$</div>
-
-                                </div>
+                                <div>xxxx</div>
 
                             </div>
 
-                            <div class="row pl-2">
+                            <div class="p-1 col-2 bg-secondary">
 
-                                <p class="text-secondary">@Html.Raw(Model.film.Descrizione)</p>
+                                <div>xxxx</div>
 
                             </div>
 
-                            <div class="row pl-2">
+                            <div class="p-1 col-2 bg-secondary">
 
-                                <div class="col-2 text-primary"><h4>Count</h4></div>
-
-                                <div class="col-10"><input asp-for="film.Spettacolis" lass="form-list" /></div>
+                                <div>xxxx</div>
 
                             </div>
 
                         </div>
 
-                      
+                        <div class="row pl-2">
+
+                            <p class="text-secondary">@Html.Raw(@Model.film.Descrizione)</p>
+
+                        </div>
+
+                        <div class="row pl-2">
+
+                            <div class="col-2 text-primary" style="min-width: 120px;"><h4>Count</h4></div>
+
+                            <div class="col-10"><input asp-for="numeroPosti" class="form-control w-50" /></div>
+
+                        </div>
 
                     </div>
 
-                </div>
+                    <div class="col-8 col-lg-3 offset-lg-1 text-center">
 
-            </div>
-
-            <div class="card-footer">
-
-                <div class="row">
-
-                    <div class="col-12 col-md-6 pb-1">
-
-                        <a class="btn btn-success form-control " style="height:50px;">Back to List</a>
-
-                    </div>
-
-                    <div class="col-12 col-md-6 pb-1">
-
-                        <button type="submit" value="Add to Cart" class="btn btn-primary form-control" style="height:50px;">Add to Cart</button>
+                        <img src="@Model.film.Immagine" class="rounded" style="width:100%" />
 
                     </div>
 
@@ -144,5 +132,27 @@
             </div>
 
         </div>
+
+        <div class="card-footer">
+
+            <div class="row">
+
+                <div class="col-12 col-md-6 pb-1">
+
+                    <a class="btn btn-success form-control " style="height:50px;" asp-action="Index">Back to Home</a>
+
+                </div>
+
+                <div class="col-12 col-md-6 pb-1">
+
+                    <button type="submit" value="Add to Cart" class="btn btn-primary form-control" style="height:50px;">Add to Cart</button>
+
+                </div>
+
+            </div>
+
+        </div>
+
     </div>
+
 </form>
