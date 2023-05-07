@@ -4,13 +4,6 @@
     ViewData["Title"] = "Upsert";
 }
 <form method="post" asp-action="Upsert" enctype="multipart/form-data">
-    @*i campi Product.Id e Product.ImageUrl sono recuperati dal Model passato alla View quando si effettua la Get su Upsert.
-    Quando di fa la Post su Upsert, bisogna distinguere due casi:
-    1) inserimento di un nuovo prodotto --> Id ==0 e ImageUrl==null
-    2) aggiornamento di un prodotto esistente --> Id!=0 e ImageUrl!=null
-    Nel secondo caso è necessario passare i campi Product.Id e Product.ImageUrl dalla View all'Action del Controller.
-    Nel primo caso non sarebbe strettamente necessario, ma possono essere passati comunque senza problemi, perché corrispondono ai valori di default di un nuovo Product
-    *@
     <input asp-for="Id" hidden />
     <input asp-for="Immagine" hidden />
     <div class="row">
@@ -20,7 +13,7 @@
                     <h2 class="text-primary">@(Model.Id != 0 ? "Update" : "Create") Film</h2>
                     <hr />
                 </div>
-                @*<div asp-validation-summary="All"></div>*@
+                <div asp-validation-summary="All"></div>
                 <div class="row mb-3">
                     <label asp-for="Titolo" class="control-label"></label>
                     <input asp-for="Titolo" class="form-control" />
@@ -28,7 +21,14 @@
                 </div>
                 <div class="row mb-3">
                     <label asp-for="Genere" class="control-label"></label>
-                    <input asp-for="Genere" class="form-control" />
+                    <select asp-for="Genere" class="form-select">
+                    <option disabled selected>Seleziona Categoria</option>
+                        <option>Azione</option>
+                        <option>Commedia</option>
+                        <option>Drammatico</option>
+                        <option>Horror</option>
+                        <option>Fantascienza </option>
+                    </select>
                     <span asp-validation-for="Genere" class="text-danger"></span>
                 </div>
                 <div class="row mb-3">
@@ -48,23 +48,9 @@
                 </div>
                 <div class="row mb-3">
                     <label asp-for="Immagine"></label>
-                    <input type="file" id="uploadBox" name="file" class="form-cotrol" style="display:none;" />
-                    <label for="uploadBox" class="form-control">Click me to upload image</label>
+                    <input type="file" id="uploadBox" name="file" class="form-cotrol"/>
                 </div>
-                @*<div class="row mb-3 col-6">
-                    <label asp-for="Product.CategoryId"></label>
-                    <select asp-for="Product.CategoryId" asp-items="@Model.CategoryList" class="form-select">
-                        <option disabled selected>--Select Category--</option>
-                    </select>
-                    <span asp-validation-for="Product.CategoryId" class="text-danger"></span>
-                </div>
-                <div class="row mb-3 col-6 ms-2">
-                    <label asp-for="Product.CoverTypeId"></label>
-                    <select asp-for="Product.CoverTypeId" asp-items="@Model.CoverTypeList" class="form-select">
-                        <option disabled selected>--Select CoverType--</option>
-                    </select>
-                    <span asp-validation-for="Product.CoverTypeId" class="text-danger"></span>
-                </div>*@
+               
                 <div class="col-12">
                     @if (Model.Id != 0)
                     {
@@ -72,7 +58,7 @@
                     }
                     else
                     {
-                        <button type="submit" onclick="return ValidateInput()" class="btn btn-primary" style="width:150px">Create</button>
+                        <button type="submit" class="btn btn-primary" style="width:150px">Create</button>
                     }
 
 
@@ -100,8 +86,8 @@
     <script>
         tinymce.init({
             selector: 'textarea',
-            plugins: 'anchor autolink charmap codesample emoticons image link lists media searchreplace table visualblocks wordcount',
-            toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table | align lineheight | numlist bullist indent outdent | emoticons charmap | removeformat',
+            plugins: 'anchor wordcount',
+            toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough',
         });
         function ValidateInput() {
             if (document.getElementById("uploadBox").value == "") {

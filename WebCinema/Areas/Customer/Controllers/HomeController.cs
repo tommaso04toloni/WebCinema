@@ -1,6 +1,7 @@
 ﻿using WebCinema.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
+using WebCinema.DataAccess.Repository.IRepository;
 
 namespace WebCinema.Controllers
 {
@@ -8,16 +9,17 @@ namespace WebCinema.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        private readonly IUnitOfWork _unitOfWork;
+        public HomeController(ILogger<HomeController> logger, IUnitOfWork unitOfWork)
 
-        //public HomeController(AppDbContext context, ILogger<HomeController> logger)
-        //{
-        //    _context = context;
-        //    _logger = logger;
-        //}
-        public HomeController(ILogger<HomeController> logger)
         {
+
             _logger = logger;
+
+            _unitOfWork = unitOfWork;
+
         }
+
 
         public IActionResult Index()
         {
