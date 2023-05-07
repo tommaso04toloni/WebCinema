@@ -1,0 +1,17 @@
+﻿using Microsoft.AspNetCore.Mvc.Rendering;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace WebCinema.Models.ViewModels
+{
+    public class PrenotazioneVM
+    {
+        public Film film { get; set; } = null!;
+        public IEnumerable<SelectListItem> SpettacoliList { get; set; } = null!;
+
+        public int numeroPosti;
+    }
+}

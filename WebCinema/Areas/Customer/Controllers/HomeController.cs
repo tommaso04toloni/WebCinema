@@ -2,6 +2,8 @@
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 using WebCinema.DataAccess.Repository.IRepository;
+using WebCinema.Models.ViewModels;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace WebCinema.Controllers
 {
@@ -26,6 +28,23 @@ namespace WebCinema.Controllers
             return View();
 
         }
+
+        public IActionResult Details(int? productId)
+
+        {
+            var selectedFilmInDb = _unitOfWork.Film.GetFirstOrDefault(film => film.Id == productId);
+            PrenotazioneVM filmVM = new()
+            {
+                film = selectedFilmInDb,
+                SpettacoliList = _unitOfWork.Spettacoli.GetAll().Where(u => u.Idfilm == productId).Select(x => new SelectListItem
+                {
+                    Text = x.DataOra.ToString(),
+                    Value = x.Id.ToString()
+                }),
+            };
+            return View(filmVM);
+        }
+
 
         public IActionResult Privacy()
         {
