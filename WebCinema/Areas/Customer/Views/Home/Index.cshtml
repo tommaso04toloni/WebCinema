@@ -1,8 +1,53 @@
 ﻿@{
     ViewData["Title"] = "Home Page";
 }
+<div class="container p-3">
 
-<div class="text-center">
-    <h1 class="display-4">Work in progress</h1>
-    <p>Films.</p>
+    <div class="row pt-4">
+
+        <div class="col-6">
+
+            <h2 class="text-primary">Film List</h2>
+
+            @* <div class="alert alert-primary" role="alert">
+
+            Row data: <span id="row-data"></span>
+
+            </div>*@
+
+        </div>
+
+    </div>
+
+    <br /><br />
+
+    <table id="tblData" class="table table-bordered table-striped cards" style="width:100%; ">
+
+        <thead>
+
+            <tr>
+                <th></th>
+
+                <th>Title</th>
+
+                <th>Author</th>
+
+                <th>Durata</th>
+
+                <th>Anno Uscita</th>
+
+                <th></th>
+
+            </tr>
+
+        </thead>
+
+    </table>
+
 </div>
+
+@section Scripts{
+
+    <script src="~/js/homeFilm.js"></script>
+
+}

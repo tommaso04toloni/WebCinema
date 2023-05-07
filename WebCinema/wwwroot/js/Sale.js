@@ -19,19 +19,17 @@ function loadDataTable() {
         },
         ajax: {
 
-            url: "/Admin/Spettacoli/GetAll"
+            url: "/Admin/Sale/GetAll"
 
         },
 
         columns: [
 
-            { data: "id", width: "20%" },
+            { data: "numeroSala", width: "25%" },
 
-            { data: "idfilm", width: "20%" },
+            { data: "postiDisponibili", width: "25%" },
 
-            { data: "idsala", width: "20%" },
-
-            { data: "dataOra", width: "20%" },
+            { data: "isSense", width: "25%" },
             {
 
                 data: "id",
@@ -39,15 +37,16 @@ function loadDataTable() {
                 render: function (data) {
                     return (`
                         <div class="w-100 text-center">
-                                <a href="/Admin/Spettacoli/Upsert?id=${data}" class="btn btn-primary mx-1">
+                                <a href="/Admin/Sale/Upsert?id=${data}" class="btn btn-primary mx-1">
                                     <i class="bi bi-pencil-square"></i>Edit</a>
-                                <a onClick=Delete("/Admin/Spettacoli/Delete/${data}")  class="btn btn-danger mx-1">
+                                <a onClick=Delete("/Admin/Sale/Delete/${data}")  class="btn btn-danger mx-1">
                                     <i class="bi bi-trash-fill"></i>Delete</a>
                         </div>
                     `)
                 },
-                width: "20%",
+                    width: "25%",
 
+                
             },
         ]
 

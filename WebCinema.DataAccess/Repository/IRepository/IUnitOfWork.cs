@@ -15,8 +15,7 @@ namespace WebCinema.DataAccess.Repository.IRepository
         IPostiRepository Posti { get; }
         IPrenotazioniRepository Prenotazioni { get; }
         IValutazioniRepository Valutazioni { get; }
-        ICategorieRepository Categorie { get; }
-        IFilmcategorieRepository Filmcategorie { get; }
+
         void Save();
     }
 }

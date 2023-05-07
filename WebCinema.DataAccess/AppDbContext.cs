@@ -13,12 +13,8 @@ public partial class AppDbContext : IdentityDbContext<IdentityUser>
         : base(options)
     {
     }
-
-    public virtual DbSet<Categorie> Categories { get; set; }
-
     public virtual DbSet<Film> Films { get; set; }
 
-    public virtual DbSet<Filmcategorie> Filmcategories { get; set; }
 
     public virtual DbSet<Posti> Postis { get; set; }
 
@@ -41,18 +37,6 @@ public partial class AppDbContext : IdentityDbContext<IdentityUser>
             .UseCollation("latin1_swedish_ci")
             .HasCharSet("latin1");
 
-        modelBuilder.Entity<Categorie>(entity =>
-        {
-            entity.HasKey(e => e.Id).HasName("PRIMARY");
-
-            entity.ToTable("categorie");
-
-            entity.Property(e => e.Id)
-                .HasColumnType("int(10) unsigned")
-                .HasColumnName("ID");
-            entity.Property(e => e.Nome).HasMaxLength(50);
-        });
-
         modelBuilder.Entity<Film>(entity =>
         {
             entity.HasKey(e => e.Id).HasName("PRIMARY");
@@ -68,37 +52,6 @@ public partial class AppDbContext : IdentityDbContext<IdentityUser>
             entity.Property(e => e.Genere).HasMaxLength(50);
             entity.Property(e => e.Immagine).HasMaxLength(200);
             entity.Property(e => e.Titolo).HasMaxLength(100);
-        });
-
-        modelBuilder.Entity<Filmcategorie>(entity =>
-        {
-            entity.HasKey(e => e.Id).HasName("PRIMARY");
-
-            entity.ToTable("filmcategorie");
-
-            entity.HasIndex(e => e.Idcategoria, "IDCategoria");
-
-            entity.HasIndex(e => e.Idfilm, "IDFilm");
-
-            entity.Property(e => e.Id)
-                .HasColumnType("int(10) unsigned")
-                .HasColumnName("ID");
-            entity.Property(e => e.Idcategoria)
-                .HasColumnType("int(10) unsigned")
-                .HasColumnName("IDCategoria");
-            entity.Property(e => e.Idfilm)
-                .HasColumnType("int(10) unsigned")
-                .HasColumnName("IDFilm");
-
-            entity.HasOne(d => d.IdcategoriaNavigation).WithMany(p => p.Filmcategories)
-                .HasForeignKey(d => d.Idcategoria)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("filmcategorie_ibfk_2");
-
-            entity.HasOne(d => d.IdfilmNavigation).WithMany(p => p.Filmcategories)
-                .HasForeignKey(d => d.Idfilm)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("filmcategorie_ibfk_1");
         });
 
         modelBuilder.Entity<Posti>(entity =>

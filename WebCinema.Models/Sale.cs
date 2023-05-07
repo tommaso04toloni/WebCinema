@@ -12,7 +12,7 @@ public partial class Sale
 
     public int PostiDisponibili { get; set; }
 
-    public ulong IsSense { get; set; }
+    public bool IsSense { get; set; }
 
     [ValidateNever]
     public virtual ICollection<Posti> Postis { get; set; } = new List<Posti>();

@@ -21,8 +21,7 @@ namespace WebCinema.DataAccess.Repository
             Posti = new PostiRepository(_db);
             Prenotazioni = new PrenotazioniRepository(_db);
             Valutazioni = new ValutazioniRepository(_db);
-            Categorie = new CategorieRepository(_db);
-            Filmcategorie = new FilmcategorieRepository(_db);
+
         }
         public IUtentiRepository Utenti { get; private set; } = null!;
         public ISaleRepository Sale { get; private set; } = null!;
@@ -31,8 +30,7 @@ namespace WebCinema.DataAccess.Repository
         public IPostiRepository Posti { get; private set; } = null!;
         public IPrenotazioniRepository Prenotazioni { get; private set; } = null!;
         public IValutazioniRepository Valutazioni { get; private set; } = null!;
-        public ICategorieRepository Categorie { get; private set; } = null!;
-        public IFilmcategorieRepository Filmcategorie { get; private set; } = null!;
+
         public void Save()
         {
             _db.SaveChanges();

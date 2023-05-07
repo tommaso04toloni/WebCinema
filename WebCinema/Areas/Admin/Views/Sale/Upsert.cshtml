@@ -4,13 +4,6 @@
     ViewData["Title"] = "Upsert";
 }
 <form method="post" asp-action="Upsert">
-    @*i campi Product.Id e Product.ImageUrl sono recuperati dal Model passato alla View quando si effettua la Get su Upsert.
-    Quando di fa la Post su Upsert, bisogna distinguere due casi:
-    1) inserimento di un nuovo prodotto --> Id ==0 e ImageUrl==null
-    2) aggiornamento di un prodotto esistente --> Id!=0 e ImageUrl!=null
-    Nel secondo caso è necessario passare i campi Product.Id e Product.ImageUrl dalla View all'Action del Controller.
-    Nel primo caso non sarebbe strettamente necessario, ma possono essere passati comunque senza problemi, perché corrispondono ai valori di default di un nuovo Product
-    *@
     <input asp-for="Id" hidden />
 
     <div class="row">
@@ -20,7 +13,7 @@
                     <h2 class="text-primary">@(Model.Id != 0 ? "Update" : "Create") Sala</h2>
                     <hr />
                 </div>
-                @*<div asp-validation-summary="All"></div>*@
+                <div asp-validation-summary="All"></div>
                 <div class="row mb-3">
                     <label asp-for="NumeroSala" class="control-label"></label>
                     <input asp-for="NumeroSala" class="form-control" />
@@ -32,24 +25,13 @@
                     <span asp-validation-for="PostiDisponibili" class="text-danger"></span>
                 </div>
                 <div class="row mb-3">
-                    <label asp-for="IsSense" class="control-label"></label>
-                    <input asp-for="IsSense" class="form-control" />
+                    <div class="form-check">
+                        <input asp-for="IsSense" class="form-check-input" />
+                        <label asp-for="IsSense" class="form-check-label">Is Sense</label>
+                    </div>
                     <span asp-validation-for="IsSense" class="text-danger"></span>
                 </div>
-                @*<div class="row mb-3 col-6">
-                <label asp-for="Product.CategoryId"></label>
-                <select asp-for="Product.CategoryId" asp-items="@Model.CategoryList" class="form-select">
-                <option disabled selected>--Select Category--</option>
-                </select>
-                <span asp-validation-for="Product.CategoryId" class="text-danger"></span>
-                </div>
-                <div class="row mb-3 col-6 ms-2">
-                <label asp-for="Product.CoverTypeId"></label>
-                <select asp-for="Product.CoverTypeId" asp-items="@Model.CoverTypeList" class="form-select">
-                <option disabled selected>--Select CoverType--</option>
-                </select>
-                <span asp-validation-for="Product.CoverTypeId" class="text-danger"></span>
-                </div>*@
+
                 <div class="col-12">
                     @if (Model.Id != 0)
                     {
@@ -57,7 +39,7 @@
                     }
                     else
                     {
-                        <button type="submit" onclick="return ValidateInput()" class="btn btn-primary" style="width:150px">Create</button>
+                        <button type="submit" class="btn btn-primary" style="width:150px">Create</button>
                     }
 
 

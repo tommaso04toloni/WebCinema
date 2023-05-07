@@ -20,8 +20,7 @@ public partial class Film
 
     [ValidateNever] 
     public string Immagine { get; set; } = null!;
-    [ValidateNever]
-    public virtual ICollection<Filmcategorie> Filmcategories { get; set; } = new List<Filmcategorie>();
+
     [ValidateNever]
     public virtual ICollection<Spettacoli> Spettacolis { get; set; } = new List<Spettacoli>();
     [ValidateNever]

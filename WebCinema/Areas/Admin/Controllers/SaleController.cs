@@ -23,8 +23,7 @@ namespace Sale4Web.Controllers
         //GET
         public IActionResult Index()
         {
-            IEnumerable<Sale> objSaleList = _unitOfWork.Sale.GetAll();
-            return View(objSaleList);
+            return View();
         }
         //GET
         public IActionResult Upsert(int? id)
@@ -33,7 +32,7 @@ namespace Sale4Web.Controllers
 
             if (id == null || id == 0)
             {
-                //restituisce una view per la creazione di un nuovo prodotto
+
                 return View(sale);
             }
             else
@@ -42,12 +41,8 @@ namespace Sale4Web.Controllers
                 if (productInDb != null)
                 {
                     sale = productInDb;
-                    //restituisce una view per l'aggiornamento del prodotto
-                    //questa view riceve un sale con tutti i campi di Product
                     return View(sale);
                 }
-                //il prodotto con l'id inviato non è stato trovato nel database.
-                //restituisce una view per creare un nuovo prodotto
                 return View(sale);
 
             }
@@ -79,39 +74,34 @@ namespace Sale4Web.Controllers
             return View(obj);
         }
 
-        //GET
+        #region API CALLS
+
+        [HttpGet]
+        public IActionResult GetAll()
+        {
+
+            var productList = _unitOfWork.Sale.GetAll();
+            return Json(new { data = productList });
+
+        }
+
+        [HttpDelete]
         public IActionResult Delete(int? id)
         {
-            if (id == null || id == 0)
+            var objFromDbFirst = _unitOfWork.Sale.GetFirstOrDefault(u => u.Id == id);
+            if (objFromDbFirst == null)
+                return Json(new { success = false, message = "Error while deleting" });
+            else
             {
-                return NotFound();
+                _unitOfWork.Sale.Remove(objFromDbFirst);
+                _unitOfWork.Save();
+                return Json(new { success = true, message = "Delete Successful" });
             }
-            //var saleFromDb = _db.Categories.Find(id);
-            var saleFromDbFirst = _unitOfWork.Sale.GetFirstOrDefault(u => u.Id == id);
-            if (saleFromDbFirst == null)
-            {
-                return NotFound();
-            }
-            return View(saleFromDbFirst);
         }
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public IActionResult DeletePost(int id, [Bind("Id")] Sale sale)
-        {
-            if (id != sale.Id)
-            {
-                return NotFound();
-            }
-            //var obj = _db.Categories.Find(id);
-            var saleFromDbFirst = _unitOfWork.Sale.GetFirstOrDefault(u => u.Id == id);
-            if (saleFromDbFirst == null)
-            {
-                return NotFound();
-            }
-            _unitOfWork.Sale.Remove(saleFromDbFirst);
-            _unitOfWork.Save();
-            TempData["success"] = "Sale deleted successfully";
-            return RedirectToAction(nameof(Index));
-        }
+
     }
+
+    #endregion
+
+    
 }
