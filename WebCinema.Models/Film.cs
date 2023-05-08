@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace WebCinema.Models;
 
@@ -15,7 +16,7 @@ public partial class Film
     public string Descrizione { get; set; } = null!;
 
     public int Durata { get; set; }
-
+    [Display(Name = "Anno Produzione")]
     public int AnnoProduzione { get; set; }
 
     [ValidateNever] 
