@@ -8,11 +8,12 @@ using Microsoft.EntityFrameworkCore;
 using WebCinema.DataAccess;
 using WebCinema.Models;
 using WebCinema.DataAccess.Repository.IRepository;
+using Microsoft.AspNetCore.Authorization;
 
 namespace WebCinema.Controllers
 {
     [Area("Admin")]
-    [Authorize(Roles = "Admin")]
+
     public class FilmController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;
@@ -23,12 +24,14 @@ namespace WebCinema.Controllers
             _hostEnvironment = hostEnvironment;
         }
         //GET
+        [Authorize(Roles = "Admin")]
         public IActionResult Index()
         {
             return View();
         }
 
         //GET
+        [Authorize(Roles = "Admin")]
         public IActionResult Upsert(int? id)
         {
             Film film = new();
@@ -57,6 +60,7 @@ namespace WebCinema.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin")]
         public IActionResult Upsert(Film obj, IFormFile? file)
         {
             //se si tratta di un nuovo prodotto --> Id ==0 e ImageUrl==null
@@ -115,6 +119,7 @@ namespace WebCinema.Controllers
         }
 
         [HttpDelete]
+        [Authorize(Roles = "Admin")]
         public IActionResult Delete(int? id)
         {
             var objFromDbFirst = _unitOfWork.Film.GetFirstOrDefault(u => u.Id == id);

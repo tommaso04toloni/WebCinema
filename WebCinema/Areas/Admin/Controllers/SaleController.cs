@@ -9,11 +9,11 @@ using WebCinema.DataAccess;
 using WebCinema.Models;
 using WebCinema.DataAccess.Repository.IRepository;
 using Microsoft.Extensions.Hosting;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Sale4Web.Controllers
 {
     [Area("Admin")]
-    [Authorize(Roles = "Admin")]
     public class SaleController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;
@@ -22,11 +22,13 @@ namespace Sale4Web.Controllers
             _unitOfWork = unitOfWork;
         }
         //GET
+        [Authorize(Roles = "Admin")]
         public IActionResult Index()
         {
             return View();
         }
         //GET
+        [Authorize(Roles = "Admin")]
         public IActionResult Upsert(int? id)
         {
             Sale sale = new();
@@ -51,6 +53,7 @@ namespace Sale4Web.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin")]
         public IActionResult Upsert(Sale obj)
         {
             //se si tratta di un nuovo prodotto --> Id ==0 e ImageUrl==null
@@ -87,6 +90,7 @@ namespace Sale4Web.Controllers
         }
 
         [HttpDelete]
+        [Authorize(Roles = "Admin")]
         public IActionResult Delete(int? id)
         {
             var objFromDbFirst = _unitOfWork.Sale.GetFirstOrDefault(u => u.Id == id);

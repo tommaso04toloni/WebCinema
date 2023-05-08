@@ -38,13 +38,13 @@
 
                     <div class="d-none d-lg-block col-lg-1 text-center py-2">
 
-@*                        <img src="" class="rounded" style="width:100%" />*@
+                            <img src="@ViewData[$"Immagine{item.Id}"]" class="rounded" style="width:100%" />
 
                     </div>
 
                     <div class="col-12 col-lg-6 pt-md-3">
 
-                        <h5><strong>@item.Spettacoli.Idfilm</strong></h5>
+                        <h5><strong>@ViewData[$"Titoli{item.Id}"]</strong></h5>
 
                         <p><small></small></p>
 
@@ -62,13 +62,13 @@
 
                             <div class="w-75 btn-group" role="group">
 
-                                <a class="btn btn-primary">
+                                    <a asp-action="Plus" asp-route-cartId="@item.Id" class="btn btn-primary">
 
                                     <i class="bi bi-plus-square"></i>
 
                                 </a> &nbsp;
 
-                                <a class="btn btn-warning">
+                                    <a asp-action="Minus" asp-route-cartId="@item.Id"  class="btn btn-warning">
 
                                     <i class="bi bi-dash-square"></i>
 
@@ -80,7 +80,7 @@
 
                         <div class="col-2 col-sm-4 col-lg-2 text-right pt-2">
 
-                            <a class="btn btn-danger">
+                                <a asp-action="Remove" asp-route-cartId="@item.Id"  class="btn btn-danger">
 
                                 <i class="bi bi-trash-fill"></i>
 

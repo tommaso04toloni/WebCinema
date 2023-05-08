@@ -10,11 +10,12 @@ using WebCinema.Models;
 using WebCinema.Models.ViewModels;
 using WebCinema.DataAccess.Repository.IRepository;
 using Microsoft.Extensions.Hosting;
+using Microsoft.AspNetCore.Authorization;
 
 namespace WebCinema.Controllers
 {
     [Area("Admin")]
-    [Authorize(Roles = "Admin")]
+
     public class SpettacoliController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;
@@ -23,13 +24,15 @@ namespace WebCinema.Controllers
             _unitOfWork = unitOfWork;
         }
         //GET
+        [Authorize(Roles = "Admin")]
         public IActionResult Index()
         {
             return View();
         }
 
-		//GET
-		public IActionResult Upsert(int? id)
+        //GET
+        [Authorize(Roles = "Admin")]
+        public IActionResult Upsert(int? id)
 		{
 
             SpettacoliVM spettacoliVM = new()
@@ -71,7 +74,8 @@ namespace WebCinema.Controllers
 		}
 		[HttpPost]
 		[ValidateAntiForgeryToken]
-		public IActionResult Upsert(SpettacoliVM obj)
+        [Authorize(Roles = "Admin")]
+        public IActionResult Upsert(SpettacoliVM obj)
 		{
 			if (ModelState.IsValid)
 			{
@@ -104,6 +108,7 @@ namespace WebCinema.Controllers
         }
 
         [HttpDelete]
+        [Authorize(Roles = "Admin")]
         public IActionResult Delete( int? id)
         {
             var objFromDbFirst = _unitOfWork.Spettacoli.GetFirstOrDefault(u => u.Id == id);

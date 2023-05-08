@@ -52,6 +52,8 @@ namespace WebCinema.Areas.Customer.Controllers
 
                     {
 
+                        ViewData[$"Titoli{ordine.Id}"] = _unitOfWork.Film.GetFirstOrDefault(u => u.Id == ordine.Spettacoli.Idfilm).Titolo;
+                        ViewData[$"Immagine{ordine.Id}"] = _unitOfWork.Film.GetFirstOrDefault(u => u.Id == ordine.Spettacoli.Idfilm).Immagine;
 
                         OrdineVM.ordineTotal += 5 * ordine.numeroPosti;
 
@@ -63,6 +65,79 @@ namespace WebCinema.Areas.Customer.Controllers
             }
 
             return View(OrdineVM);
+
+        }
+        public IActionResult Plus(int cartId)
+
+        {
+
+            var cart = _unitOfWork.OrdineBiglietti.GetFirstOrDefault(u => u.Id == cartId);
+
+            if (cart != null)
+
+            {
+
+                _unitOfWork.OrdineBiglietti.IncrementCount(cart, 1);
+
+                _unitOfWork.Save();
+
+            }
+
+            return RedirectToAction(nameof(Index));
+
+        }
+
+        public IActionResult Minus(int cartId)
+
+        {
+
+            var cart = _unitOfWork.OrdineBiglietti.GetFirstOrDefault(u => u.Id == cartId);
+
+            if (cart != null)
+
+            {
+
+                if (cart.numeroPosti <= 1)
+
+                {
+
+                    _unitOfWork.OrdineBiglietti.Remove(cart);
+
+                }
+
+                else
+
+                {
+
+                    _unitOfWork.OrdineBiglietti.DecrementCount(cart, 1);
+
+                }
+
+                _unitOfWork.Save();
+
+            }
+
+            return RedirectToAction(nameof(Index));
+
+        }
+
+        public IActionResult Remove(int cartId)
+
+        {
+
+            var cart = _unitOfWork.OrdineBiglietti.GetFirstOrDefault(u => u.Id == cartId);
+
+            if (cart != null)
+
+            {
+
+                _unitOfWork.OrdineBiglietti.Remove(cart);
+
+                _unitOfWork.Save();
+
+            }
+
+            return RedirectToAction(nameof(Index));
 
         }
     }
