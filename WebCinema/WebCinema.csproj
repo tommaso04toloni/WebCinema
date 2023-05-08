@@ -31,6 +31,7 @@
   <ItemGroup>
     <ProjectReference Include="..\WebCinema.DataAccess\WebCinema.DataAccess.csproj" />
     <ProjectReference Include="..\WebCinema.Models\WebCinema.Models.csproj" />
+    <ProjectReference Include="..\WebCinema.Utility\WebCinema.Utility.csproj" />
   </ItemGroup>
 
 </Project>

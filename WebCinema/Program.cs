@@ -3,6 +3,8 @@ using Microsoft.EntityFrameworkCore;
 using WebCinema.DataAccess.Repository;
 using WebCinema.DataAccess.Repository.IRepository;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.UI.Services;
+using WebCinema.Utility;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -22,8 +24,9 @@ builder.Services.AddDbContext<AppDbContext>(
         .EnableDetailedErrors()
 );
 
-builder.Services.AddDefaultIdentity<IdentityUser>()
- .AddEntityFrameworkStores<AppDbContext>();
+builder.Services.AddIdentity<IdentityUser, IdentityRole>().AddDefaultTokenProviders()
+
+.AddEntityFrameworkStores<AppDbContext>();
 
 //builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true).AddEntityFrameworkStores<AppDbContext>();
 
@@ -41,6 +44,10 @@ builder.Services.ConfigureApplicationCookie(options =>
     options.AccessDeniedPath = "/Identity/Account/AccessDenied";
     options.SlidingExpiration = true;
 });
+
+//registro il servizio per l'inoltro delle email che servono per la validazione degli account
+
+builder.Services.AddTransient<IEmailSender, EmailSender>();
 
 
 var app = builder.Build();
