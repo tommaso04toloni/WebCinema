@@ -6,7 +6,6 @@
 }
 
 <form method="post">
-
     <div class="card container">
 
         <div class="card-header bg-primary text-light ml-0 row ">
@@ -50,13 +49,18 @@
                         </div>
 
                         <div class="row text-center pl-2">
-                            <label asp-for="SpettacoliList" class="control-label"></label>
+@*                            <label asp-for="SpettacoliList" class="control-label"></label>
                             <select asp-for="SpettacoliList" class="form-select" asp-items="@Model.SpettacoliList">
                                 <option disabled selected>--Select Spettacolo--</option>
                             </select>
                             <span asp-validation-for="SpettacoliList" class="text-danger"></span>
+*@
 
+                            <select asp-for="spettacoliId" asp-items="@Model.SpettacoliList" class="form-select" aria-label="spettacolo">
 
+                                <option disabled selected>-Select spettacolo-</option>
+
+                            </select>
                         </div>
 
                         <div class="row text-center pl-2" style="color:maroon; font-weight:bold">

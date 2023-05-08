@@ -34,7 +34,6 @@ namespace WebCinema.DataAccess.Repository
         public IPrenotazioniRepository Prenotazioni { get; private set; } = null!;
         public IValutazioniRepository Valutazioni { get; private set; } = null!;
         public IOrdineBigliettiRepository OrdineBiglietti { get; private set; } = null!;
-
         public IApplicationUserRepository ApplicationUser { get; private set; } = null!;
 
         public void Save()
