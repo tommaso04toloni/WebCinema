@@ -27,6 +27,8 @@ public partial class AppDbContext : IdentityDbContext<IdentityUser>
     public virtual DbSet<Utenti> Utentis { get; set; }
 
     public virtual DbSet<Valutazioni> Valutazionis { get; set; }
+    public DbSet<OrdineBiglietti> OrdineBiglietti { get; set; } = null!;
+
 
     public DbSet<ApplicationUser> ApplicationUsers { get; set; } = null!;
 
