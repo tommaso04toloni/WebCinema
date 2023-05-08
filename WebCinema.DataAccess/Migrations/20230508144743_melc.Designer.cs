@@ -11,8 +11,8 @@ using WebCinema.DataAccess;
 namespace WebCinema.DataAccess.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20230507165805_migro")]
-    partial class migro
+    [Migration("20230508144743_melc")]
+    partial class melc
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -172,12 +172,10 @@ namespace WebCinema.DataAccess.Migrations
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
                 {
                     b.Property<string>("LoginProvider")
-                        .HasMaxLength(128)
-                        .HasColumnType("varchar(128)");
+                        .HasColumnType("varchar(255)");
 
                     b.Property<string>("ProviderKey")
-                        .HasMaxLength(128)
-                        .HasColumnType("varchar(128)");
+                        .HasColumnType("varchar(255)");
 
                     b.Property<string>("ProviderDisplayName")
                         .HasColumnType("longtext");
@@ -214,12 +212,10 @@ namespace WebCinema.DataAccess.Migrations
                         .HasColumnType("varchar(255)");
 
                     b.Property<string>("LoginProvider")
-                        .HasMaxLength(128)
-                        .HasColumnType("varchar(128)");
+                        .HasColumnType("varchar(255)");
 
                     b.Property<string>("Name")
-                        .HasMaxLength(128)
-                        .HasColumnType("varchar(128)");
+                        .HasColumnType("varchar(255)");
 
                     b.Property<string>("Value")
                         .HasColumnType("longtext");
@@ -266,6 +262,31 @@ namespace WebCinema.DataAccess.Migrations
                         .HasName("PRIMARY");
 
                     b.ToTable("film", (string)null);
+                });
+
+            modelBuilder.Entity("WebCinema.Models.OrdineBiglietti", b =>
+                {
+                    b.Property<uint>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int unsigned");
+
+                    b.Property<string>("ApplicationUserId")
+                        .IsRequired()
+                        .HasColumnType("varchar(255)");
+
+                    b.Property<uint>("SpettacoloId")
+                        .HasColumnType("int(10) unsigned");
+
+                    b.Property<int>("numeroPosti")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ApplicationUserId");
+
+                    b.HasIndex("SpettacoloId");
+
+                    b.ToTable("OrdineBiglietti");
                 });
 
             modelBuilder.Entity("WebCinema.Models.Posti", b =>
@@ -528,6 +549,25 @@ namespace WebCinema.DataAccess.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("WebCinema.Models.OrdineBiglietti", b =>
+                {
+                    b.HasOne("WebCinema.Models.ApplicationUser", "ApplicationUser")
+                        .WithMany()
+                        .HasForeignKey("ApplicationUserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("WebCinema.Models.Spettacoli", "Spettacoli")
+                        .WithMany()
+                        .HasForeignKey("SpettacoloId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("ApplicationUser");
+
+                    b.Navigation("Spettacoli");
                 });
 
             modelBuilder.Entity("WebCinema.Models.Posti", b =>

@@ -5,7 +5,7 @@
 namespace WebCinema.DataAccess.Migrations
 {
     /// <inheritdoc />
-    public partial class pippo : Migration
+    public partial class melca : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)

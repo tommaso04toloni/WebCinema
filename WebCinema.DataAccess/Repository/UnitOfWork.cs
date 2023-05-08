@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using WebCinema.DataAccess.Repository.IRepository;
 
 namespace WebCinema.DataAccess.Repository
 {
@@ -21,6 +22,8 @@ namespace WebCinema.DataAccess.Repository
             Posti = new PostiRepository(_db);
             Prenotazioni = new PrenotazioniRepository(_db);
             Valutazioni = new ValutazioniRepository(_db);
+            OrdineBiglietti = new OrdineBigliettiRepository(_db);
+            ApplicationUser = new ApplicationUserRepository(_db);
 
         }
         public IUtentiRepository Utenti { get; private set; } = null!;
@@ -30,6 +33,9 @@ namespace WebCinema.DataAccess.Repository
         public IPostiRepository Posti { get; private set; } = null!;
         public IPrenotazioniRepository Prenotazioni { get; private set; } = null!;
         public IValutazioniRepository Valutazioni { get; private set; } = null!;
+        public IOrdineBigliettiRepository OrdineBiglietti { get; private set; } = null!;
+
+        public IApplicationUserRepository ApplicationUser { get; private set; } = null!;
 
         public void Save()
         {
