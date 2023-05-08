@@ -13,6 +13,7 @@ using Microsoft.Extensions.Hosting;
 namespace Sale4Web.Controllers
 {
     [Area("Admin")]
+    [Authorize(Roles = "Admin")]
     public class SaleController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;

@@ -8,10 +8,12 @@ using Microsoft.EntityFrameworkCore;
 using WebCinema.DataAccess;
 using WebCinema.Models;
 using WebCinema.DataAccess.Repository.IRepository;
+using Microsoft.AspNetCore.Authorization;
 
 namespace WebCinema.Controllers
 {
     [Area("Admin")]
+    [Authorize(Roles = "Admin")]
     public class ValutazioniController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;

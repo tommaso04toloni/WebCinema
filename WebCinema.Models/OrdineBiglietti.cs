@@ -18,8 +18,6 @@ namespace WebCinema.Models
         [ForeignKey(nameof(SpettacoloId))]
         [ValidateNever]
         public Spettacoli Spettacoli { get; set; }
-
-        [Range(1,4, ErrorMessage = "puoi ordinare da 1 a 4 posti")]
         public int numeroPosti{ get; set; }
         public string ApplicationUserId { get; set; } = null!;
 
@@ -28,5 +26,7 @@ namespace WebCinema.Models
         [ValidateNever]
 
         public ApplicationUser ApplicationUser { get; set; } = null!;
+        [NotMapped]
+        public double Price { get; set; }
     }
 }

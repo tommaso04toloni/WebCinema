@@ -14,6 +14,7 @@ using Microsoft.Extensions.Hosting;
 namespace WebCinema.Controllers
 {
     [Area("Admin")]
+    [Authorize(Roles = "Admin")]
     public class SpettacoliController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;

@@ -31,25 +31,27 @@
                         <li class="nav-item">
                             <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button"
-                               aria-haspopup="true" aria-expanded="false">Content Management</a>
-                            <div class="dropdown-menu">
+                        @if (User.IsInRole("Admin"))
+                        {
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button"
+                                   aria-haspopup="true" aria-expanded="false">Content Management</a>
+                                <div class="dropdown-menu">
 
-                                <a class="nav-link" asp-area="Admin" asp-controller="Film" asp-action="Index" style="color:black">Films</a>
-                                <a class="nav-link" asp-area="Admin" asp-controller="Utenti" asp-action="Index" style="color:black">Utenti</a>
-                                <a class="nav-link" asp-area="Admin" asp-controller="Posti" asp-action="Index" style="color:black">Posti</a>
-                                <a class="nav-link" asp-area="Admin" asp-controller="Sale" asp-action="Index" style="color:black">Sale</a>
-                                <a class="nav-link" asp-area="Admin" asp-controller="Spettacoli" asp-action="Index" style="color:black">Spettacoli</a>
-                                <a class="nav-link" asp-area="Admin" asp-controller="Valutazioni" asp-action="Index" style="color:black">Valutazioni</a>
-                                <a class="nav-link" asp-area="Admin" asp-controller="Prenotazioni" asp-action="Index" style="color:black">Prenotazioni</a>
+                                    <a class="nav-link" asp-area="Admin" asp-controller="Film" asp-action="Index" style="color:black">Films</a>
+                                    <a class="nav-link" asp-area="Admin" asp-controller="Utenti" asp-action="Index" style="color:black">Utenti</a>
+                                    <a class="nav-link" asp-area="Admin" asp-controller="Posti" asp-action="Index" style="color:black">Posti</a>
+                                    <a class="nav-link" asp-area="Admin" asp-controller="Sale" asp-action="Index" style="color:black">Sale</a>
+                                    <a class="nav-link" asp-area="Admin" asp-controller="Spettacoli" asp-action="Index" style="color:black">Spettacoli</a>
+                                    <a class="nav-link" asp-area="Admin" asp-controller="Valutazioni" asp-action="Index" style="color:black">Valutazioni</a>
+                                    <a class="nav-link" asp-area="Admin" asp-controller="Prenotazioni" asp-action="Index" style="color:black">Prenotazioni</a>
 
-                                @*<a class="dropdown-item" href="#">Something else here</a>
+                                    @*<a class="dropdown-item" href="#">Something else here</a>
                                 <div class="dropdown-divider"></div>
                                 <a class="dropdown-item" href="#">Separated link</a>*@
-                            </div>
-                        </li>
-
+                                </div>
+                            </li>
+                        }
                         <li class="nav-item">
                             <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
                         </li>

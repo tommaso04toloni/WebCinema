@@ -15,7 +15,7 @@ namespace WebCinema.Models.ViewModels
         public IEnumerable<SelectListItem> SpettacoliList { get; set; } = null!;
         public uint spettacoliId { get; set; } = 0;
 
-        public int numeroPosti;
+        public int numeroPosti { get; set; }
         public string ApplicationUserId { get; set; } = null!;
 
         [ForeignKey(nameof(ApplicationUserId))]

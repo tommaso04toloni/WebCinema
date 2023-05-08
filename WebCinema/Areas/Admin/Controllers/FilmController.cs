@@ -12,6 +12,7 @@ using WebCinema.DataAccess.Repository.IRepository;
 namespace WebCinema.Controllers
 {
     [Area("Admin")]
+    [Authorize(Roles = "Admin")]
     public class FilmController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;

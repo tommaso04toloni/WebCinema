@@ -43,7 +43,6 @@ namespace WebCinema.Controllers
                     Text = x.DataOra.ToString(),
                     Value = x.Id.ToString()
                 }),
-                numeroPosti = 1,
             };
             return View(filmVM);
         }
@@ -55,13 +54,13 @@ namespace WebCinema.Controllers
         [Authorize]
 
         public IActionResult Details(PrenotazioneVM prenotazioneVM)
-
         {
             OrdineBiglietti ordineBiglietti = new()
             {
                 SpettacoloId = prenotazioneVM.spettacoliId,
                 numeroPosti = prenotazioneVM.numeroPosti,
                 ApplicationUser = prenotazioneVM.ApplicationUser,
+                Price = 5
             };
 
             var userIdentity = User.Identity;

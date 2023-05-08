@@ -1,4 +1,5 @@
-﻿<form method="post">
+﻿@model WebCinema.Models.ViewModels.OrdineVM
+<form method="post">
 
     <br />
 
@@ -20,7 +21,7 @@
 
                     <div class="col-6 text-end">
 
-                        <a class="btn btn-outline-info btn-sm">Continua ad Acquistare</a>
+                        <a asp-area="Customer" asp-controller="Home" asp-action="Index" class="btn btn-outline-info btn-sm">Continua ad Acquistare</a>
 
                     </div>
 
@@ -29,20 +30,23 @@
             </div>
 
             <div class="card-body">
+                @foreach(var item in Model.listaOrdini)
+
+{
 
                 <div class="row">
 
                     <div class="d-none d-lg-block col-lg-1 text-center py-2">
 
-                        <img src="img" class="rounded" style="width:100%" />
+@*                        <img src="" class="rounded" style="width:100%" />*@
 
                     </div>
 
                     <div class="col-12 col-lg-6 pt-md-3">
 
-                        <h5><strong>Title</strong></h5>
+                        <h5><strong>@item.Spettacoli.Idfilm</strong></h5>
 
-                        <p><small>Description</small></p>
+                        <p><small></small></p>
 
                     </div>
 
@@ -50,7 +54,7 @@
 
                         <div class="col-4 text-md-right pt-4">
 
-                            <h6><strong>$Price<span class="text-muted">x</span> Count </strong></h6>
+                            <h6><strong>POSTI : @item.numeroPosti </strong></h6>
 
                         </div>
 
@@ -89,6 +93,7 @@
                 </div>
 
                 <hr />
+                }
 
                 <div class="row">
 
@@ -98,9 +103,9 @@
 
                             <li class="list-group-item d-flex justify-content-between bg-light">
 
-                                <span class="text-info"> Total (USD)</span>
+                                <span class="text-info"> Total (EUR)</span>
 
-                                <strong class="text-info">$$$</strong>
+                                <strong class="text-info">@Model.ordineTotal.ToString("c")</strong>
 
                             </li>
 
@@ -116,11 +121,7 @@
 
                 <div class="card-footer row">
 
-                    <div class="col-sm-12 col-lg-4 col-md-6 offset-lg-8 offset-md-6 ">
 
-                        <a class="btn btn-success form-control">Summary</a>
-
-                    </div>
 
                 </div>
 

@@ -1,13 +1,69 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
+using WebCinema.DataAccess.Repository.IRepository;
+using WebCinema.Models.ViewModels;
 
 namespace WebCinema.Areas.Customer.Controllers
 {
     [Area("Customer")]
     public class OrdineBigliettiController : Controller
     {
-        public IActionResult Index()
+        private readonly IUnitOfWork _unitOfWork;
+
+        public OrdineVM OrdineVM { get; set; }
+
+        public OrdineBigliettiController(IUnitOfWork unitOfWork)
+
         {
-            return View();
+
+            _unitOfWork = unitOfWork;
+
+            OrdineVM = new OrdineVM();
+
+        }
+
+        public IActionResult Index()
+
+        {
+
+            var userIdentity = User.Identity;
+
+            if (userIdentity != null)
+
+            {
+
+                var claimsIdentity = (ClaimsIdentity)userIdentity;
+
+                var claim = claimsIdentity?.FindFirst(ClaimTypes.NameIdentifier);
+
+                if (claim != null)
+
+                {
+
+                    OrdineVM = new OrdineVM()
+
+                    {
+
+                        listaOrdini = _unitOfWork.OrdineBiglietti.GetAll(u => u.ApplicationUserId == claim.Value, includeProperties: "Spettacoli"),
+
+                    };
+
+                    foreach (var ordine in OrdineVM.listaOrdini)
+
+                    {
+
+
+                        OrdineVM.ordineTotal += 5 * ordine.numeroPosti;
+
+                    }
+                    
+
+                }
+
+            }
+
+            return View(OrdineVM);
+
         }
     }
 }
