@@ -41,6 +41,7 @@ namespace WebCinema.Controllers
                     Text = x.DataOra.ToString(),
                     Value = x.Id.ToString()
                 }),
+                numeroPosti = 1,
             };
             return View(filmVM);
         }

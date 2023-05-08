@@ -39,69 +39,28 @@
 
                         <div class="row pl-2">
 
-                            <h5 class="text-muted">ISBN : xxxx</h5>
+
 
                         </div>
 
                         <div class="row pl-2">
 
-                            <h5 class="text-muted pb-2">List Price: <strike>xxx</strike></h5>
+
 
                         </div>
 
                         <div class="row text-center pl-2">
+                            <label asp-for="SpettacoliList" class="control-label"></label>
+                            <select asp-for="SpettacoliList" class="form-select" asp-items="@Model.SpettacoliList">
+                                <option disabled selected>--Select Spettacolo--</option>
+                            </select>
+                            <span asp-validation-for="SpettacoliList" class="text-danger"></span>
 
-                            <div class="p-1 col-2 bg-secondary border-bottom">
-
-                                <div>Quantity</div>
-
-                            </div>
-
-                            <div class="p-1 col-2 bg-secondary border-bottom">
-
-                                <div>1-50</div>
-
-                            </div>
-
-                            <div class="p-1 col-2 bg-secondary border-bottom">
-
-                                <div>51-100</div>
-
-                            </div>
-
-                            <div class="p-1 col-2 bg-secondary border-bottom">
-
-                                <div>100+</div>
-
-                            </div>
 
                         </div>
 
                         <div class="row text-center pl-2" style="color:maroon; font-weight:bold">
 
-                            <div class="p-1 col-2 bg-secondary">
-
-                                <div>Price</div>
-
-                            </div>
-
-                            <div class="p-1 col-2 bg-secondary">
-
-                                <div>xxxx</div>
-
-                            </div>
-
-                            <div class="p-1 col-2 bg-secondary">
-
-                                <div>xxxx</div>
-
-                            </div>
-
-                            <div class="p-1 col-2 bg-secondary">
-
-                                <div>xxxx</div>
-
-                            </div>
 
                         </div>
 
